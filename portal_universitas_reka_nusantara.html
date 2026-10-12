@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>URN — Portal Akademik</title>
+<style>
+:root{--navy:#172b4d;--blue:#315f9e;--teal:#2f8f83;--bg:#f4f6fa;--ink:#243247;--muted:#738096;--line:#e5eaf1;--white:#fff;--gold:#f2b84b;--red:#c95353}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.5 Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}
+button,input,select,textarea{font:inherit}button{cursor:pointer;border:0}.hidden{display:none!important}
+.login-wrap{min-height:100vh;display:grid;grid-template-columns:1.05fr .95fr;background:#fff}
+.login-brand{background:linear-gradient(145deg,#172b4d,#234c72);color:white;padding:7vw;display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden}
+.login-brand:after{content:"";position:absolute;width:430px;height:430px;border:1px solid #ffffff20;border-radius:50%;right:-160px;bottom:-160px;box-shadow:0 0 0 50px #ffffff08,0 0 0 100px #ffffff06}
+.brand-mark{width:46px;height:46px;border-radius:13px;background:#ffffff18;display:grid;place-items:center;font-weight:800;font-size:20px;border:1px solid #ffffff25}
+.brand-title{font-size:clamp(34px,4vw,56px);line-height:1.1;letter-spacing:-1.5px;max-width:520px;margin:24px 0 18px}
+.brand-copy{color:#d0d9e6;max-width:440px;font-size:16px}
+.brand-foot{color:#c2cede;font-size:12px;position:relative;z-index:1}
+.login-panel{display:grid;place-items:center;padding:36px}
+.login-card{width:min(390px,100%)}
+.login-card h2{font-size:27px;letter-spacing:-.7px;margin:0 0 6px}.sub{color:var(--muted);margin:0 0 26px}
+.field{display:flex;flex-direction:column;gap:7px;margin-bottom:16px}.field label{font-size:12px;font-weight:700;color:#536176}
+.field input,.field select,.field textarea,.inline-input{width:100%;border:1px solid #dce3ec;border-radius:9px;padding:11px 12px;background:white;color:var(--ink);outline:none}
+.field input:focus,.field select:focus,.field textarea:focus,.inline-input:focus{border-color:#7197c8;box-shadow:0 0 0 3px #315f9e14}
+.primary{background:var(--navy);color:#fff;padding:11px 16px;border-radius:9px;font-weight:650}.primary:hover{background:#24416d}
+.secondary{background:#edf2f8;color:#29415f;padding:9px 12px;border-radius:8px;font-weight:650}.danger{background:#fff0f0;color:#a33d3d;padding:9px 12px;border-radius:8px;font-weight:650}
+.full{width:100%}.demo-note{background:#f3f7fb;border:1px solid #e3eaf2;padding:12px;border-radius:9px;color:#65758a;font-size:12px;margin-top:18px}
+.shell{display:grid;grid-template-columns:238px 1fr;min-height:100vh}
+.sidebar{background:#172b4d;color:#d7e0ed;padding:22px 14px;display:flex;flex-direction:column;gap:28px}
+.logo-row{display:flex;align-items:center;gap:10px;padding:0 9px}.logo-icon{width:36px;height:36px;display:grid;place-items:center;border-radius:10px;background:#ffffff18;color:#fff;font-weight:800}.logo-name{font-weight:750;color:white;font-size:14px}.logo-small{font-size:10px;color:#aebdd1;letter-spacing:1.3px}
+.nav-label{font-size:10px;text-transform:uppercase;letter-spacing:1.3px;color:#91a4be;padding:0 12px;margin-bottom:7px}
+.nav-list{display:flex;flex-direction:column;gap:4px}.nav-btn{display:flex;align-items:center;gap:11px;padding:10px 12px;border-radius:8px;color:#c2cede;background:transparent;text-align:left;width:100%;font-size:13px}.nav-btn .ico{width:18px;text-align:center;font-size:15px}.nav-btn:hover,.nav-btn.active{background:#ffffff14;color:#fff}.nav-btn.active{box-shadow:inset 3px 0 #58b6a8}
+.sidebar-bottom{margin-top:auto;border-top:1px solid #ffffff18;padding:16px 8px 0}.user-mini{display:flex;gap:10px;align-items:center}.avatar{width:35px;height:35px;border-radius:50%;background:#dcebe8;color:#27685f;display:grid;place-items:center;font-weight:800;flex-shrink:0}.user-mini strong{display:block;color:white;font-size:12px}.user-mini span{font-size:11px;color:#aebdd1}
+.main{min-width:0}.topbar{height:72px;background:#fff;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 34px;gap:16px}
+.breadcrumb{font-size:12px;color:var(--muted)}.breadcrumb strong{color:var(--ink);font-size:13px;margin-left:7px}.top-right{display:flex;align-items:center;gap:12px}.semester{font-size:12px;color:#64748b;background:#f3f6fa;padding:8px 10px;border-radius:7px}
+.content{max-width:1180px;margin:0 auto;padding:30px 34px 48px}.page-head{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;margin-bottom:24px}.eyebrow{font-size:11px;text-transform:uppercase;letter-spacing:1.4px;color:var(--teal);font-weight:800}.page-head h1{font-size:27px;letter-spacing:-.8px;margin:5px 0 5px}.page-head p{margin:0;color:var(--muted)}
+.grid{display:grid;gap:16px}.stats{grid-template-columns:repeat(4,minmax(0,1fr));margin-bottom:20px}.stat,.panel{background:white;border:1px solid var(--line);border-radius:12px}.stat{padding:18px}.stat-top{display:flex;justify-content:space-between;align-items:center;color:var(--muted);font-size:12px}.stat-icon{width:32px;height:32px;display:grid;place-items:center;border-radius:9px;background:#edf5f4;color:var(--teal);font-size:16px}.stat-num{font-size:27px;font-weight:750;letter-spacing:-.7px;margin:12px 0 3px}.stat-foot{font-size:11px;color:var(--muted)}.panel{padding:20px;margin-bottom:17px}.panel-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:16px}.panel h3{margin:0;font-size:15px;letter-spacing:-.2px}.panel-head p{margin:3px 0 0;color:var(--muted);font-size:12px}
+.dashboard-grid{grid-template-columns:minmax(0,1.45fr) minmax(260px,.85fr)}.course-list{display:flex;flex-direction:column;gap:0}.course-row{display:flex;align-items:center;gap:12px;padding:13px 0;border-bottom:1px solid #edf0f5}.course-row:last-child{border:0}.course-color{width:40px;height:40px;border-radius:10px;display:grid;place-items:center;background:#edf3fb;color:#3b6293;font-weight:800}.course-row strong{display:block;font-size:12px}.course-row small{color:var(--muted);font-size:11px}.course-score{margin-left:auto;font-weight:750;font-size:15px}.pill{display:inline-flex;align-items:center;gap:5px;padding:4px 8px;border-radius:99px;font-size:10px;font-weight:750;background:#e8f5ef;color:#28795e}.pill.pending{background:#fff4dc;color:#956b16}.pill.neutral{background:#edf2f8;color:#52647b}.activity{display:flex;gap:11px;padding:12px 0;border-bottom:1px solid #edf0f5}.activity:last-child{border:0}.activity-dot{width:8px;height:8px;background:var(--teal);border-radius:50%;margin-top:6px;flex-shrink:0}.activity strong{font-size:12px;display:block}.activity p{font-size:11px;color:var(--muted);margin:3px 0}
+.table-wrap{overflow-x:auto}table{width:100%;border-collapse:collapse;white-space:nowrap}th{text-align:left;font-size:10px;letter-spacing:.7px;text-transform:uppercase;color:#7a8799;font-weight:750;padding:11px 12px;background:#f8fafd;border-bottom:1px solid var(--line)}td{padding:13px 12px;border-bottom:1px solid #edf0f5;font-size:12px}tbody tr:last-child td{border-bottom:0}.grade{font-weight:800;color:#2e6e63}.muted{color:var(--muted)}.row-actions{display:flex;gap:7px;align-items:center}
+.assignment{display:flex;gap:13px;align-items:flex-start;padding:15px 0;border-bottom:1px solid #edf0f5}.assignment:last-child{border:0}.file-icon{width:42px;height:42px;border-radius:10px;background:#eef3fa;display:grid;place-items:center;color:#426b9f;font-size:18px;flex-shrink:0}.assignment-main{flex:1;min-width:0}.assignment-main strong{display:block;font-size:13px}.assignment-main p{font-size:11px;color:var(--muted);margin:4px 0 8px}.assignment-side{text-align:right;min-width:105px}.assignment-side small{display:block;color:var(--muted);font-size:10px;margin-bottom:7px}
+.discussion-item{padding:15px 0;border-bottom:1px solid #edf0f5}.discussion-item:last-child{border:0}.discussion-meta{display:flex;align-items:center;gap:8px;margin-bottom:7px}.discussion-meta strong{font-size:12px}.discussion-meta small{color:var(--muted);font-size:10px}.discussion-body{font-size:12px;color:#526176;overflow-wrap:anywhere}.compose{display:flex;flex-direction:column;gap:9px}.compose textarea{resize:vertical;min-height:75px;border:1px solid #dce3ec;border-radius:9px;padding:11px;outline:none}.compose-bottom{display:flex;justify-content:space-between;align-items:center;gap:10px}.small-note{font-size:10px;color:var(--muted)}
+.notice{padding:12px 14px;border-radius:9px;background:#fff8e9;color:#8b681e;border:1px solid #f5e4b8;font-size:12px;margin-bottom:16px}.notice strong{display:block;margin-bottom:3px}
+.result-box{margin-top:12px;padding:14px;border-radius:9px;background:#f6f8fb;border:1px solid var(--line);font-size:12px;overflow-wrap:anywhere}.result-box h4{margin:0 0 7px}.result-box p{margin:4px 0}.mono{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11px}
+.empty{padding:28px;text-align:center;color:var(--muted);font-size:12px}.toast{position:fixed;right:22px;bottom:22px;background:#172b4d;color:white;padding:12px 16px;border-radius:10px;box-shadow:0 8px 28px #172b4d2a;z-index:10;max-width:340px}.footer-note{text-align:center;font-size:10px;color:#8793a4;padding:20px 0}
+@media(max-width:900px){.shell{grid-template-columns:70px 1fr}.sidebar{padding:18px 9px}.logo-row{justify-content:center;padding:0}.logo-name,.logo-small,.nav-label,.nav-btn .nav-text,.user-mini>div:last-child{display:none}.nav-btn{justify-content:center;padding:12px 4px}.nav-btn .ico{font-size:17px}.sidebar-bottom{padding:15px 5px}.user-mini{justify-content:center}.stats{grid-template-columns:repeat(2,minmax(0,1fr))}.dashboard-grid{grid-template-columns:1fr}.content{padding:24px 20px}.topbar{padding:0 20px}}
+@media(max-width:600px){.login-wrap{grid-template-columns:1fr}.login-brand{display:none}.login-panel{min-height:100vh;padding:24px}.shell{grid-template-columns:1fr}.sidebar{position:sticky;top:0;z-index:5;flex-direction:row;align-items:center;padding:8px 10px;gap:10px;overflow-x:auto}.logo-row{display:none}.sidebar nav{display:flex;gap:3px}.nav-list{flex-direction:row}.nav-label,.sidebar-bottom{display:none}.nav-btn{width:auto;padding:9px 11px}.nav-btn .nav-text{display:inline;font-size:11px}.topbar{height:58px;padding:0 15px}.semester{display:none}.content{padding:22px 14px}.stats{gap:10px}.stat{padding:13px}.stat-num{font-size:23px}.page-head{display:block}.page-head>.primary{margin-top:13px}.panel{padding:15px}.assignment-side{min-width:80px}.assignment-side .secondary{padding:7px;font-size:11px}}
+</style>
+
+<style id="urn-redesign">
+:root{--navy:#244638;--blue:#456c53;--teal:#c46b42;--bg:#f6f3eb;--ink:#26382f;--muted:#7d8378;--line:#e5e0d5;--white:#fff;--gold:#d6a35d;--red:#b95649}
+body{background:#f6f3eb;color:#26382f;font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}
+.login-wrap{background:#f6f3eb;grid-template-columns:1fr 1fr}
+.login-brand{background:#244638;position:relative}
+.login-brand:after{border-color:#e9d9bd30;box-shadow:0 0 0 60px #e9d9bd08,0 0 0 120px #e9d9bd05}
+.brand-mark{background:#dce7d8;color:#244638;border:0}
+.eyebrow{color:#bd7048}
+.login-card h2{color:#244638}
+.primary{background:#bd7048;border-radius:7px}.primary:hover{background:#a95d37}
+.secondary{background:#e8ece2;color:#345342;border-radius:7px}
+.danger{border-radius:7px}
+.field input,.field select,.field textarea{border-radius:7px;background:#fffdf8;border-color:#e1dccf}
+.demo-note{background:#eeeee5;border-color:#e1dfd2}
+.shell{display:flex;flex-direction:column;min-height:100vh}
+.sidebar{position:sticky;top:0;z-index:8;flex-direction:row;align-items:center;gap:25px;padding:12px 28px;background:#244638;box-shadow:0 3px 14px #203e2c15}
+.logo-row{padding:0;min-width:220px}.logo-icon{border-radius:50%;background:#dce7d8;color:#244638}
+.logo-name{font-size:13px}.logo-small{letter-spacing:1.6px}
+.sidebar nav{flex:1;min-width:0}.nav-label{display:none}.nav-list{flex-direction:row;gap:4px;overflow-x:auto}
+.nav-btn{white-space:nowrap;width:auto;padding:10px 12px;border-radius:6px;font-size:12px}
+.nav-btn.active{background:#dce7d8;color:#244638;box-shadow:none}.nav-btn:hover{background:#ffffff19}
+.nav-btn.active .ico{color:#bd7048}
+.sidebar-bottom{margin:0;border:0;padding:0 0 0 12px}
+.user-mini{border-left:1px solid #ffffff2b;padding-left:16px}.avatar{background:#e6d3bd;color:#77492f}
+.main{width:100%;min-width:0}
+.topbar{height:58px;padding:0 32px;background:#fbfaf6;border-bottom:1px solid #e6e0d4}
+.breadcrumb{font-size:11px}.breadcrumb strong{color:#244638}
+.semester{background:#efeee6;color:#6c766a;border-radius:5px}
+.content{max-width:1440px;padding:28px 32px 42px}
+.page-head{margin-bottom:20px}.page-head h1{font-size:30px;letter-spacing:-1px;color:#244638}.page-head p{font-size:13px}
+.stat,.panel{border-radius:8px;border-color:#e5dfd2;box-shadow:0 3px 12px #4a4a2a05}
+.stat{padding:18px;background:#fffdf8}.stat-icon{background:#e9eee3;color:#4f7557;border-radius:8px}
+.stat:nth-child(2) .stat-icon{background:#f5e7dc;color:#bd7048}.stat:nth-child(3) .stat-icon{background:#e8e6f1;color:#75669a}.stat:nth-child(4) .stat-icon{background:#f4e4e3;color:#b95649}
+.stat-num{color:#244638}.panel{padding:20px;background:#fffdf8}.panel h3{color:#244638}
+.course-color{background:#e9eee3;color:#456c53;border-radius:7px}
+.pill{border-radius:5px;background:#e7efe5;color:#46724f}.pill.pending{background:#f7eadc;color:#a76536}.pill.neutral{background:#efeee6;color:#687266}
+th{background:#f4f1e8}td{border-bottom-color:#eee8dc}
+.file-icon{background:#e9eee3;color:#4e7655;border-radius:8px}
+.discussion-item,.activity,.course-row,.assignment{border-bottom-color:#eee8dc}
+.result-box{background:#f5f2e9;border-color:#e5dfd2}
+.notice{background:#fbf0e2;color:#925e32;border-color:#f0dcc5}
+.compose textarea{border-radius:7px;background:#fffdf8;border-color:#e1dccf}
+.footer-note{color:#8b8b7e}
+#pageContent{animation:fadein .22s ease-out}
+@keyframes fadein{from{opacity:.5;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
+@media(max-width:1050px){.sidebar{gap:12px;padding:10px 14px}.logo-row{min-width:auto}.logo-name,.logo-small{display:none}.nav-btn{padding:10px}.sidebar-bottom{display:none}.content{padding:22px 18px}}
+@media(max-width:700px){.sidebar{position:sticky;display:block;padding:9px 8px}.sidebar nav{width:100%}.nav-list{gap:3px}.nav-btn{padding:9px 10px}.nav-btn .nav-text{font-size:10px}.topbar{padding:0 14px}.content{padding:20px 12px}.login-wrap{grid-template-columns:1fr}.login-brand{display:none}.login-panel{min-height:100vh}.stats{grid-template-columns:repeat(2,minmax(0,1fr))}.dashboard-grid{grid-template-columns:1fr}}
+</style>
+
+</head>
+<body>
+<section id="loginScreen" class="login-wrap">
+  <div class="login-brand">
+    <div class="brand-mark">C.</div>
+    <div>
+      <div class="eyebrow" style="color:#8ed2c5">PORTAL AKADEMIK</div>
+      <h1 class="brand-title">Ruang tumbuh<br>generasi masa depan.</h1>
+      <p class="brand-copy">Ruang bersama untuk belajar, berkarya, dan tumbuh di Universitas Reka Nusantara.</p>
+    </div>
+    <div class="brand-foot">© 2026 Universitas Reka Nusantara · Simulasi portal akademik</div>
+  </div>
+  <div class="login-panel">
+    <form class="login-card" id="loginForm">
+      <div class="eyebrow">SELAMAT DATANG KEMBALI</div>
+      <h2>Masuk ke portal</h2>
+      <p class="sub">Gunakan akun demo untuk menjelajahi portal kampus.</p>
+      <div class="field"><label for="loginUser">Nama pengguna</label><input id="loginUser" value="nara" autocomplete="username" required placeholder="Contoh: nara"></div>
+      <div class="field"><label for="loginRole">Masuk sebagai</label><select id="loginRole"><option value="student">Mahasiswa</option><option value="lecturer">Dosen</option><option value="admin">Admin</option></select></div>
+      <div class="field"><label for="loginPass">Kata sandi demo</label><input id="loginPass" type="password" value="demo123" autocomplete="current-password" required placeholder="Masukkan kata sandi"></div>
+      <button class="primary full" type="submit">Masuk ke portal <span aria-hidden="true">→</span></button>
+      <div class="demo-note"><strong>Akun sintetis untuk demo</strong><br>Mahasiswa: <b>nara</b> · Dosen: <b>bu-ratih</b> · Admin: <b>admin-urn</b><br>Kata sandi demo untuk semua akun: demo123. Ini prototipe lokal, bukan sistem login sungguhan.</div>
+    </form>
+  </div>
+</section>
+<div id="appShell" class="shell hidden">
+  <aside class="sidebar">
+    <div class="logo-row"><div class="logo-icon">C.</div><div><div class="logo-name">Reka Nusantara</div><div class="logo-small">UNIVERSITY</div></div></div>
+    <nav>
+      <div class="nav-label">MENU UTAMA</div>
+      <div class="nav-list" id="navList">
+        <button class="nav-btn active" data-page="dashboard"><span class="ico">▦</span><span class="nav-text">Ringkasan</span></button>
+        <button class="nav-btn" data-page="grades"><span class="ico">▤</span><span class="nav-text">Nilai akademik</span></button>
+        <button class="nav-btn" data-page="assignments"><span class="ico">↥</span><span class="nav-text">Tugas kuliah</span></button>
+        <button class="nav-btn" data-page="discussion"><span class="ico">◌</span><span class="nav-text">Ruang diskusi</span></button>
+        <button class="nav-btn" data-page="documents"><span class="ico">▣</span><span class="nav-text">Dokumen kelas</span></button>
+        <button class="nav-btn" data-page="grading"><span class="ico">✓</span><span class="nav-text">Penilaian dosen</span></button>
+        <button class="nav-btn" data-page="users"><span class="ico">♙</span><span class="nav-text">Kelola akun</span></button>
+      </div>
+    </nav>
+    <div class="sidebar-bottom"><div class="user-mini"><div class="avatar" id="miniAvatar">NP</div><div><strong id="miniName">Nara Prameswari</strong><span id="miniRole">Mahasiswa</span></div></div></div>
+  </aside>
+  <main class="main">
+    <header class="topbar"><div class="breadcrumb">Portal akademik <strong id="crumb">Ringkasan</strong></div><div class="top-right"><span class="semester">TA 2026/2027 · Semester 1</span><button class="secondary" id="logoutBtn">Keluar ↗</button></div></header>
+    <div class="content" id="pageContent"></div>
+    <div class="footer-note">UNIVERSITAS REKA NUSANTARA · PROTOTIPE PRAKTIKUM · SELURUH DATA BERSIFAT FIKTIF</div>
+  </main>
+</div>
+<div id="toast" class="toast hidden" role="status"></div>
+<script>
+const people = {
+  nara:{name:"Nara Prameswari",id:"26.11.0142",role:"student",major:"Sistem Informasi"},
+  "raka":{name:"Raka Adinata",id:"26.11.0147",role:"student",major:"Sistem Informasi"},
+  "dinda":{name:"Dinda Larasati",id:"26.11.0151",role:"student",major:"Informatika"},
+  "bu-ratih":{name:"Ratih Kusuma, M.Kom.",id:"DSN-008",role:"lecturer",major:"Dosen · Perancangan Sistem Digital"},
+  "admin-urn":{name:"Alya Permata",id:"ADM-014",role:"admin",major:"Administrator Sistem"}
+};
+const grades = [
+  {code:"IF201",course:"Perancangan Sistem Digital",lecturer:"Ratih Kusuma",score:88,letter:"A",status:"Final"},
+  {code:"IF205",course:"Pengelolaan Data",lecturer:"Dimas Prakoso",score:84,letter:"A-",status:"Final"},
+  {code:"SI202",course:"Analisis Proses Organisasi",lecturer:"Maya Larasati",score:91,letter:"A",status:"Final"},
+  {code:"IF209",course:"Keamanan Sistem Informasi",lecturer:"Ratih Kusuma",score:79,letter:"B+",status:"Final"}
+];
+const submissions = [
+  {id:"TGS-101",title:"Analisis kebutuhan sistem",course:"Perancangan Sistem Digital",due:"16 Okt 2026",status:"Sudah dikumpulkan",student:"Nara Prameswari",score:"—"},
+  {id:"TGS-102",title:"Rancangan ERD perpustakaan",course:"Pengelolaan Data",due:"18 Okt 2026",status:"Perlu dikumpulkan",student:"Nara Prameswari",score:"—"},
+  {id:"TGS-103",title:"Audit antarmuka aplikasi",course:"Keamanan Sistem Informasi",due:"21 Okt 2026",status:"Sudah dinilai",student:"Raka Adinata",score:"86"}
+];
+const docs = {
+  "DOC-11":{owner:"nara",ownerName:"Nara Prameswari",title:"Rancangan Sistem Perpustakaan",content:"Dokumen rancangan berisi kebutuhan pengguna, diagram alur, dan rancangan basis data untuk proyek kelas."},
+  "DOC-12":{owner:"raka",ownerName:"Raka Adinata",title:"Catatan Proyek Pribadi",content:"Catatan proyek fiktif Bima: rancangan modul inventaris, jadwal pengerjaan, dan evaluasi mingguan."},
+  "DOC-13":{owner:"dinda",ownerName:"Dinda Larasati",title:"Draft Laporan Praktikum",content:"Draft laporan praktikum fiktif: tujuan, metodologi, hasil pengujian, dan kesimpulan."}
+};
+let currentUser = people.nara;
+let comments = [
+  {name:"Ratih Kusuma · Dosen",time:"Hari ini, 09.20",text:"Selamat pagi. Untuk diskusi minggu ini, silakan bahas perbedaan validasi di sisi klien dan sisi server."},
+  {name:"Raka Adinata",time:"Hari ini, 10.05",text:"Menurut saya validasi server tetap diperlukan karena validasi browser bisa dilewati oleh pengguna."}
+];
+let users = Object.entries(people).map(([username,p])=>({username,...p}));
+let toastTimer;
+const $ = s => document.querySelector(s);
+const escapeHtml = value => String(value).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+function notify(message){const t=$("#toast");t.textContent=message;t.classList.remove("hidden");clearTimeout(toastTimer);toastTimer=setTimeout(()=>t.classList.add("hidden"),2800)}
+function roleLabel(role){return ({student:"Mahasiswa",lecturer:"Dosen",admin:"Admin"})[role]||role}
+function login(){
+ const username=$("#loginUser").value.trim().toLowerCase();
+ const role=$("#loginRole").value;
+ const password=$("#loginPass").value;
+ const person=people[username];
+ if(!person || person.role!==role || password!=="demo123"){notify("Akun, peran, atau kata sandi demo tidak sesuai. Coba nara, bu-ratih, atau admin-urn dengan sandi demo123.");return}
+ currentUser=person;
+ $("#loginScreen").classList.add("hidden");$("#appShell").classList.remove("hidden");
+ $("#miniName").textContent=person.name;$("#miniRole").textContent=roleLabel(person.role);$("#miniAvatar").textContent=person.name.split(" ").map(x=>x[0]).slice(0,2).join("");
+ document.querySelectorAll("[data-page]").forEach(b=>b.classList.remove("hidden"));
+ if(person.role==="student"){["grading","users"].forEach(p=>document.querySelector(`[data-page="${p}"]`).classList.add("hidden"))}
+ if(person.role==="lecturer"){["grades","users"].forEach(p=>document.querySelector(`[data-page="${p}"]`).classList.add("hidden"))}
+ if(person.role==="admin"){["grades","assignments","discussion","grading"].forEach(p=>document.querySelector(`[data-page="${p}"]`).classList.add("hidden"))}
+ renderPage("dashboard");
+}
+$("#loginForm").addEventListener("submit",e=>{e.preventDefault();login()});
+$("#logoutBtn").addEventListener("click",()=>{$("#appShell").classList.add("hidden");$("#loginScreen").classList.remove("hidden");$("#loginPass").value="";notify("Anda keluar dari prototipe.")});
+$("#navList").addEventListener("click",e=>{const b=e.target.closest("[data-page]");if(!b)return;renderPage(b.dataset.page)});
+function setActive(page){document.querySelectorAll(".nav-btn").forEach(b=>b.classList.toggle("active",b.dataset.page===page))}
+function pageHead(kicker,title,desc,action=""){return `<div class="page-head"><div><div class="eyebrow">${kicker}</div><h1>${title}</h1><p>${desc}</p></div>${action}</div>`}
+function stat(label,num,foot,icon){return `<div class="stat"><div class="stat-top"><span>${label}</span><span class="stat-icon">${icon}</span></div><div class="stat-num">${num}</div><div class="stat-foot">${foot}</div></div>`}
+function renderPage(page){
+ setActive(page);const labels={dashboard:"Ringkasan",grades:"Nilai akademik",assignments:"Tugas kuliah",discussion:"Ruang diskusi",documents:"Dokumen kelas",grading:"Penilaian dosen",users:"Kelola akun"};
+ $("#crumb").textContent=labels[page]||"Ringkasan";
+ const fn=({dashboard:dashboardPage,grades:gradesPage,assignments:assignmentsPage,discussion:discussionPage,documents:documentsPage,grading:gradingPage,users:usersPage})[page]||dashboardPage;
+ $("#pageContent").innerHTML=fn();
+}
+function dashboardPage(){
+ const isStudent=currentUser.role==="student",isLecturer=currentUser.role==="lecturer",isAdmin=currentUser.role==="admin";
+ let head=pageHead("TA 2026/2027 · GANJIL",`Selamat datang, ${escapeHtml(currentUser.name.split(" ")[0])}`,isStudent?"Berikut ringkasan aktivitas akademikmu minggu ini.":isLecturer?"Ringkasan kelas dan aktivitas penilaian Anda.":"Pantau pengguna dan aktivitas portal kampus.");
+ if(isStudent)return head+`<div class="grid stats">${stat("Mata kuliah aktif","4","Semester berjalan","▤")}${stat("Rata-rata nilai","85,5","Dari nilai yang sudah final","↗")}${stat("Tugas terkumpul","3 / 4","Satu tugas perlu diselesaikan","↥")}${stat("Diskusi baru","2","Pembaruan ruang kelas","◌")}</div><div class="grid dashboard-grid"><section class="panel"><div class="panel-head"><div><h3>Nilai terbaru</h3><p>Rekap mata kuliah semester ini</p></div><button class="secondary" onclick="renderPage('grades')">Lihat semua</button></div><div class="course-list">${grades.map(g=>`<div class="course-row"><div class="course-color">${g.code.slice(0,2)}</div><div><strong>${g.course}</strong><small>${g.code} · ${g.lecturer}</small></div><div class="course-score">${g.score}</div></div>`).join("")}</div></section><section class="panel"><div class="panel-head"><div><h3>Aktivitas mendatang</h3><p>Jangan lewatkan tenggat</p></div></div><div class="activity"><div class="activity-dot"></div><div><strong>Rancangan ERD perpustakaan</strong><p>Pengelolaan Data · Tenggat 18 Okt 2026</p><span class="pill pending">Perlu dikumpulkan</span></div></div><div class="activity"><div class="activity-dot" style="background:#d6a33d"></div><div><strong>Diskusi keamanan web</strong><p>Forum kelas · 4 balasan baru</p></div></div><div class="activity"><div class="activity-dot" style="background:#8297b3"></div><div><strong>Audit antarmuka aplikasi</strong><p>Nilai telah diterbitkan</p><span class="pill">Selesai</span></div></div></section></div>`;
+ if(isLecturer)return head+`<div class="grid stats">${stat("Kelas diampu","3","Semester ganjil","▤")}${stat("Tugas menunggu","8","Perlu ditinjau","↥")}${stat("Mahasiswa","64","Dari seluruh kelas","♙")}${stat("Diskusi aktif","12","Topik minggu ini","◌")}</div><section class="panel"><div class="panel-head"><div><h3>Aktivitas dosen</h3><p>Pintasan pekerjaan akademik</p></div></div><div class="course-list"><div class="course-row"><div class="course-color">01</div><div><strong>Periksa pengumpulan tugas</strong><small>8 pengumpulan menunggu penilaian</small></div><button class="secondary" onclick="renderPage('grading')">Buka</button></div><div class="course-row"><div class="course-color">02</div><div><strong>Tanggapi ruang diskusi</strong><small>Diskusi validasi aplikasi web</small></div><button class="secondary" onclick="renderPage('discussion')">Buka</button></div></div></section>`;
+ return head+`<div class="grid stats">${stat("Akun terdaftar",users.length,"Semua akun demo","♙")}${stat("Mahasiswa",users.filter(u=>u.role==="student").length,"Data sintetis","▦")}${stat("Dosen",users.filter(u=>u.role==="lecturer").length,"Data sintetis","▤")}${stat("Dokumen demo",Object.keys(docs).length,"Objek latihan","▣")}</div><section class="panel"><div class="panel-head"><div><h3>Pengelolaan portal</h3><p>Data latihan untuk demonstrasi kelas</p></div><button class="primary" onclick="renderPage('users')">Kelola akun</button></div><p class="muted">Portal ini menggunakan data fiktif dan penyimpanan sementara di memori browser. Perubahan akan hilang saat halaman dimuat ulang.</p></section>`;
+}
+function gradesPage(){return pageHead("AKADEMIK","Nilai akademik","Rekap hasil belajar pada semester berjalan.")+`<section class="panel"><div class="panel-head"><div><h3>Kartu hasil studi sementara</h3><p>${escapeHtml(currentUser.name)} · ${escapeHtml(currentUser.id)}</p></div><span class="pill">Semester ganjil</span></div><div class="table-wrap"><table><thead><tr><th>Kode</th><th>Mata kuliah</th><th>Dosen</th><th>Nilai angka</th><th>Huruf</th><th>Status</th></tr></thead><tbody>${grades.map(g=>`<tr><td>${g.code}</td><td><strong>${g.course}</strong></td><td>${g.lecturer}</td><td class="grade">${g.score}</td><td><strong>${g.letter}</strong></td><td><span class="pill">${g.status}</span></td></tr>`).join("")}</tbody></table></div><p class="small-note" style="margin-top:15px">Nilai pada halaman ini hanya data simulasi untuk keperluan praktikum.</p></section>`}
+function assignmentsPage(){return pageHead("PEMBELAJARAN","Tugas kuliah","Lihat tenggat, unggah berkas, dan pantau status pengumpulan.")+`<section class="panel"><div class="panel-head"><div><h3>Daftar tugas</h3><p>Semester ganjil 2026/2027</p></div></div>${submissions.filter(s=>s.student===currentUser.name||s.student==="Raka Adinata").map(s=>`<div class="assignment"><div class="file-icon">▤</div><div class="assignment-main"><strong>${s.title}</strong><p>${s.course} · Tenggat ${s.due}</p><span class="pill ${s.status==="Perlu dikumpulkan"?"pending":""}">${s.status}</span></div><div class="assignment-side"><small>${s.score==="—"?"PDF, DOCX":"Nilai: "+s.score}</small><button class="secondary" onclick="openUpload('${s.id}')">${s.status==="Perlu dikumpulkan"?"Unggah tugas":"Lihat tugas"}</button></div></div>`).join("")}<div id="uploadArea"></div></section>`}
+function openUpload(id){const area=$("#uploadArea");area.innerHTML=`<div class="result-box"><h4>Pengumpulan tugas · ${id}</h4><p class="muted">Pilih berkas untuk simulasi unggah. Berkas tidak dikirim ke server.</p><div class="field" style="margin-top:12px"><label for="taskFile">Berkas tugas</label><input id="taskFile" type="file"></div><button class="primary" onclick="submitDemoFile('${id}')">Kirim pengumpulan</button></div>`}
+function submitDemoFile(id){const f=$("#taskFile").files[0];if(!f){notify("Pilih berkas terlebih dahulu.");return}notify(`Simulasi: ${f.name} dipilih untuk ${id}. Tidak ada berkas yang diunggah ke server.`)}
+function discussionPage(){return pageHead("KOLABORASI","Ruang diskusi","Berbagi ide dan bertanya bersama teman sekelas.")+`<section class="panel"><div class="panel-head"><div><h3>Forum: Keamanan Sistem Informasi</h3><p>Topik minggu ini · ${comments.length} kiriman</p></div><span class="pill">Aktif</span></div><div id="commentsList">${comments.map(c=>`<div class="discussion-item"><div class="discussion-meta"><div class="avatar" style="width:29px;height:29px;font-size:10px">${escapeHtml(c.name.split(" ").map(x=>x[0]).slice(0,2).join(""))}</div><strong>${escapeHtml(c.name)}</strong><small>${escapeHtml(c.time)}</small></div><div class="discussion-body">${c.text}</div></div>`).join("")}</div><div class="compose" style="border-top:1px solid var(--line);padding-top:17px;margin-top:10px"><label for="commentText"><strong>Tulis tanggapan</strong></label><textarea id="commentText" placeholder="Tulis pertanyaan atau pendapatmu di sini..."></textarea><div class="compose-bottom"><span class="small-note">Gunakan bahasa yang sopan dan relevan dengan topik.</span><button class="primary" onclick="postComment()">Kirim tanggapan</button></div></div></section><div class="notice"><strong>Mode praktikum: Stored XSS</strong>Kiriman forum pada demo rentan dirender sebagai HTML. Coba hanya payload uji lokal yang disediakan di bawah ini. Pada aplikasi nyata, konten pengguna harus ditampilkan sebagai teks aman.</div><section class="panel"><div class="panel-head"><div><h3>Uji tampilan komentar</h3><p>Payload lokal untuk mengamati perbedaan render HTML dan teks</p></div></div><button class="secondary" onclick="fillXssDemo()">Isi payload demo</button><p class="small-note" style="margin-top:9px">Payload contoh: <span class="mono">&lt;img src=x onerror=alert('Demo XSS')&gt;</span>. Jangan gunakan pada situs atau data orang lain.</p></section>`}
+function fillXssDemo(){$("#commentText").value="<img src=x onerror=alert('Demo XSS')>";notify("Payload demo dimasukkan ke kotak komentar.")}
+function postComment(){const text=$("#commentText").value.trim();if(!text){notify("Tulis tanggapan terlebih dahulu.");return}comments.push({name:currentUser.name,time:"Baru saja",text});renderPage("discussion");notify("Tanggapan ditambahkan ke forum demo.")}
+function documentsPage(){return pageHead("MATERI KELAS","Dokumen kelas","Buka dokumen simulasi berdasarkan ID dokumen.")+`<div class="notice"><strong>Mode praktikum: IDOR / kontrol akses lemah</strong>Demo ini sengaja mengambil dokumen hanya berdasarkan ID tanpa memeriksa kepemilikan. Jangan masukkan dokumen atau data sungguhan.</div><section class="panel"><div class="panel-head"><div><h3>Penampil dokumen</h3><p>Masukkan ID dokumen untuk melihat hasil pencarian</p></div></div><div class="field"><label for="docId">ID dokumen</label><input id="docId" value="DOC-11" placeholder="Contoh: DOC-11"></div><button class="primary" onclick="lookupDocument()">Buka dokumen</button><div id="docResult"></div><div style="margin-top:17px"><div class="small-note" style="margin-bottom:8px">ID dokumen sintetis yang tersedia</div><div class="row-actions"><button class="secondary" onclick="setDoc('DOC-11')">DOC-11</button><button class="secondary" onclick="setDoc('DOC-12')">DOC-12</button><button class="secondary" onclick="setDoc('DOC-13')">DOC-13</button></div></div></section>`}
+function setDoc(id){$("#docId").value=id;lookupDocument()}
+function lookupDocument(){const id=$("#docId").value.trim().toUpperCase();const doc=docs[id];const result=$("#docResult");if(!doc){result.innerHTML=`<div class="result-box"><p>Dokumen tidak ditemukan untuk ID <b>${escapeHtml(id)}</b>.</p></div>`;return}
+// INTENTIONAL LAB FLAW: ID lookup is performed without checking doc.owner against currentUser.
+result.innerHTML=`<div class="result-box"><div class="eyebrow">HASIL DOKUMEN · ${escapeHtml(id)}</div><h4 style="margin-top:8px">${escapeHtml(doc.title)}</h4><p><b>Pemilik:</b> ${escapeHtml(doc.ownerName)}</p><p><b>Isi dokumen:</b> ${escapeHtml(doc.content)}</p><p class="small-note">Requester: ${escapeHtml(currentUser.name)} · ownerCheck=false · lookup=hit</p></div>`;
+}
+function gradingPage(){return pageHead("PENGELOLAAN KELAS","Penilaian tugas","Periksa pengumpulan tugas dan masukkan nilai simulasi.")+`<section class="panel"><div class="panel-head"><div><h3>Daftar pengumpulan</h3><p>Data tugas fiktif</p></div></div><div class="table-wrap"><table><thead><tr><th>ID tugas</th><th>Mahasiswa</th><th>Nama tugas</th><th>Status</th><th>Nilai</th><th>Aksi</th></tr></thead><tbody>${submissions.map(s=>`<tr><td>${s.id}</td><td>${s.student}</td><td>${s.title}</td><td><span class="pill ${s.score==="—"?"pending":""}">${s.score==="—"?"Menunggu nilai":"Dinilai"}</span></td><td><input class="inline-input" style="width:75px;padding:7px" id="score-${s.id}" type="number" min="0" max="100" placeholder="${s.score}"></td><td><button class="secondary" onclick="saveGrade('${s.id}')">Simpan</button></td></tr>`).join("")}</tbody></table></div></section>`}
+function saveGrade(id){const input=$(`#score-${id}`);const value=Number(input.value);if(input.value===""||value<0||value>100){notify("Masukkan nilai antara 0 sampai 100.");return}const s=submissions.find(x=>x.id===id);if(s){s.score=String(value);s.status="Sudah dinilai"}notify(`Nilai simulasi ${value} disimpan untuk ${id}.`);renderPage("grading")}
+function usersPage(){return pageHead("ADMINISTRASI","Kelola akun","Lihat dan tambahkan akun demo untuk simulasi pengelolaan pengguna.",'<button class="primary" onclick="showAddUser()">+ Tambah akun</button>')+`<section class="panel"><div class="panel-head"><div><h3>Pengguna portal</h3><p>${users.length} akun sintetis</p></div></div><div class="table-wrap"><table><thead><tr><th>Nama pengguna</th><th>Nama lengkap</th><th>ID</th><th>Peran</th><th>Program / fungsi</th></tr></thead><tbody>${users.map(u=>`<tr><td><strong>${escapeHtml(u.username)}</strong></td><td>${escapeHtml(u.name)}</td><td>${escapeHtml(u.id)}</td><td><span class="pill neutral">${roleLabel(u.role)}</span></td><td>${escapeHtml(u.major)}</td></tr>`).join("")}</tbody></table></div><div id="addUserArea"></div></section>`}
+function showAddUser(){$("#addUserArea").innerHTML=`<div class="result-box"><h4>Tambah akun demo</h4><div class="grid" style="grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:12px"><div class="field"><label for="newUsername">Nama pengguna</label><input id="newUsername" placeholder="contoh: dinda"></div><div class="field"><label for="newName">Nama lengkap fiktif</label><input id="newName" placeholder="Dinda Puspita"></div><div class="field"><label for="newId">ID kampus</label><input id="newId" placeholder="26.11.0160"></div><div class="field"><label for="newRole">Peran</label><select id="newRole"><option value="student">Mahasiswa</option><option value="lecturer">Dosen</option><option value="admin">Admin</option></select></div></div><button class="primary" onclick="addUser()">Simpan akun</button></div>`}
+function addUser(){const username=$("#newUsername").value.trim().toLowerCase(),name=$("#newName").value.trim(),id=$("#newId").value.trim(),role=$("#newRole").value;if(!username||!name||!id){notify("Lengkapi semua kolom.");return}if(users.some(u=>u.username===username)){notify("Nama pengguna sudah ada.");return}const p={username,name,id,role,major:roleLabel(role)+" · Demo"};users.push(p);people[username]=p;notify("Akun sintetis berhasil ditambahkan.");renderPage("users")}
+</script>
+</body>
+</html>
